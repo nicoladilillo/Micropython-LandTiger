@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "runtime.h": "c",
+        "startup.h": "c",
+        "lpc17xx.h": "c",
+        "delay.h": "c",
+        "gc.h": "c",
+        "pyexec.h": "c",
+        "mpconfig.h": "c",
+        "gchelper.h": "c",
+        "stdio.h": "c",
+        "mstimer.h": "c",
+        "hrtimer.h": "c",
+        "scan.h": "c",
+        "system.h": "c",
+        "usbserial.h": "c",
+        "usbapi.h": "c",
+        "cdc_vcom.h": "c",
+        "vcomdemo.h": "c",
+        "library.h": "c",
+        "irq.h": "c",
+        "usbcfg.h": "c",
+        "mphal.h": "c"
+    }
+}

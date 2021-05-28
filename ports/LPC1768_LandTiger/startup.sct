@@ -1,0 +1,43 @@
+#! armcc -E
+
+#define MBED_APP_START 0x00000000
+
+#define MBED_APP_SIZE 0x80000
+
+LR_IROM1 MBED_APP_START MBED_APP_SIZE ; load region size_region
+{   
+  ER_IROM0 MBED_APP_START 0x2FC    ; load address = execution address
+  {
+    *.o (RESET, +First)
+    .ANY (+RO)
+  }
+  ER_CRP (MBED_APP_START + 0x2FC) FIXED 4
+  {
+    *.o (.CRPSection)
+  }
+  ER_IROM1 (MBED_APP_START + (0x2FC + 4)) FIXED (MBED_APP_SIZE - (0x2FC + 4))
+  {
+    *(InRoot$$Sections)
+    .ANY (+RO)
+  }
+  RW_IRAM1 0x10000000 0x8000    ; RW and ZI
+  {
+   .ANY (+RW +ZI)
+  }
+  RW_IRAM2 0x2007C000 0x4000    ; RW data, USB RAM used by the Log module
+  {
+   .ANY (AHBSRAM0)
+  }
+  RW_IRAM3 0x20080000 0x3FFC    ; RW data, ETH RAM used by the Net module. Leave 4 bytes for the fault code at 20083FFC
+  {
+   .ANY (AHBSRAM1)
+  }
+  RW_IRAM4 0x40038000 0x0800    ; RW data, CAN RAM
+  {
+   .ANY (CANRAM)
+  }
+}
+
+
+
+
