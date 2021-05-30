@@ -10,11 +10,8 @@ build/lib/utils/stdout_helpers.o: ../../lib/utils/stdout_helpers.c \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/cdefs.h \
  /usr/include/newlib/sys/string.h /usr/include/newlib/unistd.h \
  /usr/include/newlib/sys/unistd.h /usr/include/newlib/sys/types.h \
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /usr/include/newlib/machine/types.h ../../py/mpconfig.h mpconfigport.h \
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h \
+ ../../py/mpconfig.h mpconfigport.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h \
  /usr/include/newlib/alloca.h ../../py/mphal.h mphalport.h \
@@ -34,11 +31,8 @@ build/lib/utils/stdout_helpers.o: ../../lib/utils/stdout_helpers.c \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/cdefs.h :
  /usr/include/newlib/sys/string.h /usr/include/newlib/unistd.h :
  /usr/include/newlib/sys/unistd.h /usr/include/newlib/sys/types.h :
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
- /usr/include/newlib/machine/types.h ../../py/mpconfig.h mpconfigport.h :
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h :
+ ../../py/mpconfig.h mpconfigport.h :
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h :
  /usr/include/newlib/alloca.h ../../py/mphal.h mphalport.h :

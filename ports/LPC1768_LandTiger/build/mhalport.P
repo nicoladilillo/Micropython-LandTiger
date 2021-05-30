@@ -21,15 +21,12 @@ build/mhalport.o: mhalport.c /usr/include/newlib/string.h \
  ../../py/pystack.h ../../py/stream.h ../../py/mperrno.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  ../../py/mphal.h mphalport.h ../../extmod/virtpin.h ../../extmod/misc.h \
- LPC17xx.h core_cm3.h system_LPC17xx.h type.h usb.h \
- /usr/include/newlib/stdio.h \
+ LPC17xx.h core_cm3.h core_cmInstr.h core_cmFunc.h system_LPC17xx.h \
+ type.h usb.h /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdarg.h \
- /usr/include/newlib/sys/types.h /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
- usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h serial.h led/led.h
+ /usr/include/newlib/sys/types.h /usr/include/newlib/machine/types.h \
+ /usr/include/newlib/sys/stdio.h usbcfg.h usbhw.h usbcore.h cdc.h \
+ cdcuser.h serial.h led/led.h
 mhalport.c /usr/include/newlib/string.h :
  /usr/include/newlib/_ansi.h /usr/include/newlib/newlib.h :
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h :
@@ -53,12 +50,9 @@ mhalport.c /usr/include/newlib/string.h :
  ../../py/pystack.h ../../py/stream.h ../../py/mperrno.h :
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h :
  ../../py/mphal.h mphalport.h ../../extmod/virtpin.h ../../extmod/misc.h :
- LPC17xx.h core_cm3.h system_LPC17xx.h type.h usb.h :
- /usr/include/newlib/stdio.h :
+ LPC17xx.h core_cm3.h core_cmInstr.h core_cmFunc.h system_LPC17xx.h :
+ type.h usb.h /usr/include/newlib/stdio.h :
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdarg.h :
- /usr/include/newlib/sys/types.h /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
- usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h serial.h led/led.h :
+ /usr/include/newlib/sys/types.h /usr/include/newlib/machine/types.h :
+ /usr/include/newlib/sys/stdio.h usbcfg.h usbhw.h usbcore.h cdc.h :
+ cdcuser.h serial.h led/led.h :

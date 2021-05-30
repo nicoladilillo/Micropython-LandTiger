@@ -9,14 +9,11 @@ build/py/runtime.o: ../../py/runtime.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h \
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
- /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
- /usr/include/newlib/assert.h ../../py/parsenum.h ../../py/mpconfig.h \
- mpconfigport.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h \
+ /usr/include/newlib/sys/stdio.h /usr/include/newlib/string.h \
+ /usr/include/newlib/sys/string.h /usr/include/newlib/assert.h \
+ ../../py/parsenum.h ../../py/mpconfig.h mpconfigport.h \
+ /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h \
  /usr/include/newlib/alloca.h ../../py/lexer.h ../../py/qstr.h \
  ../../py/misc.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdbool.h \
@@ -41,14 +38,11 @@ build/py/runtime.o: ../../py/runtime.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h :
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h :
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
- /usr/include/newlib/string.h /usr/include/newlib/sys/string.h :
- /usr/include/newlib/assert.h ../../py/parsenum.h ../../py/mpconfig.h :
- mpconfigport.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h :
+ /usr/include/newlib/sys/stdio.h /usr/include/newlib/string.h :
+ /usr/include/newlib/sys/string.h /usr/include/newlib/assert.h :
+ ../../py/parsenum.h ../../py/mpconfig.h mpconfigport.h :
+ /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h :
  /usr/include/newlib/alloca.h ../../py/lexer.h ../../py/qstr.h :
  ../../py/misc.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdbool.h :

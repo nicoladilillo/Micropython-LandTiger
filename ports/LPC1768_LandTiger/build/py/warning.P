@@ -9,12 +9,8 @@ build/py/warning.o: ../../py/warning.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h \
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
- ../../py/emit.h ../../py/lexer.h \
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h \
+ /usr/include/newlib/sys/stdio.h ../../py/emit.h ../../py/lexer.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h \
  ../../py/mpconfig.h mpconfigport.h /usr/include/newlib/alloca.h \
@@ -40,12 +36,8 @@ build/py/warning.o: ../../py/warning.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h :
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h :
- /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
- /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
- ../../py/emit.h ../../py/lexer.h :
+ /usr/include/newlib/sys/_stdint.h /usr/include/newlib/machine/types.h :
+ /usr/include/newlib/sys/stdio.h ../../py/emit.h ../../py/lexer.h :
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  /usr/include/newlib/stdint.h /usr/include/newlib/sys/_intsup.h :
  ../../py/mpconfig.h mpconfigport.h /usr/include/newlib/alloca.h :

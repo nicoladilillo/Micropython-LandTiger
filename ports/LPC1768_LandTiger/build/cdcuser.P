@@ -12,10 +12,6 @@ build/cdcuser.o: cdcuser.c type.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h \
- /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  usbhw.h usbcfg.h usbcore.h cdc.h cdcuser.h serial.h
 cdcuser.c type.h :
@@ -32,9 +28,5 @@ cdcuser.c type.h :
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h :
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h :
- /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
  usbhw.h usbcfg.h usbcore.h cdc.h cdcuser.h serial.h :

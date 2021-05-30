@@ -11,9 +11,9 @@ build/py/map.o: ../../py/map.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/cdefs.h \
- /usr/include/newlib/machine/stdlib.h /usr/include/newlib/alloca.h \
- /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
- /usr/include/newlib/assert.h ../../py/mpconfig.h mpconfigport.h \
+ /usr/include/newlib/machine/stdlib.h /usr/include/newlib/string.h \
+ /usr/include/newlib/sys/string.h /usr/include/newlib/assert.h \
+ ../../py/mpconfig.h mpconfigport.h /usr/include/newlib/alloca.h \
  ../../py/misc.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/runtime.h ../../py/mpstate.h \
  ../../py/mpthread.h ../../py/nlr.h \
@@ -34,9 +34,9 @@ build/py/map.o: ../../py/map.c \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h :
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/cdefs.h :
- /usr/include/newlib/machine/stdlib.h /usr/include/newlib/alloca.h :
- /usr/include/newlib/string.h /usr/include/newlib/sys/string.h :
- /usr/include/newlib/assert.h ../../py/mpconfig.h mpconfigport.h :
+ /usr/include/newlib/machine/stdlib.h /usr/include/newlib/string.h :
+ /usr/include/newlib/sys/string.h /usr/include/newlib/assert.h :
+ ../../py/mpconfig.h mpconfigport.h /usr/include/newlib/alloca.h :
  ../../py/misc.h /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/runtime.h ../../py/mpstate.h :
  ../../py/mpthread.h ../../py/nlr.h :

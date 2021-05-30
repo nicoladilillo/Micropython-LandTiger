@@ -11,10 +11,6 @@ build/main.o: main.c /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h \
- /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
  ../../py/compile.h ../../py/lexer.h ../../py/mpconfig.h mpconfigport.h \
@@ -30,9 +26,10 @@ build/main.o: main.c /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
  ../../py/pystack.h ../../py/objfun.h ../../py/repl.h ../../py/gc.h \
  ../../py/mperrno.h /usr/include/newlib/errno.h \
  /usr/include/newlib/sys/errno.h ../../lib/utils/pyexec.h \
- ../../py/stackctrl.h ../../lib/utils/gchelper.h LPC17xx.h core_cm3.h \
- system_LPC17xx.h type.h usb.h usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h \
- serial.h vcomdemo.h led/led.h delay.h
+ ../../py/stackctrl.h ../../lib/utils/gchelper.h mpconfigport.h LPC17xx.h \
+ core_cm3.h core_cmInstr.h core_cmFunc.h system_LPC17xx.h type.h usb.h \
+ usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h serial.h vcomdemo.h led/led.h \
+ delay.h
 main.c /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  /usr/include/newlib/stdint.h :
  /usr/include/newlib/machine/_default_types.h :
@@ -46,10 +43,6 @@ main.c /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h :
  /usr/include/newlib/sys/lock.h /usr/include/newlib/sys/types.h :
- /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h :
  ../../py/compile.h ../../py/lexer.h ../../py/mpconfig.h mpconfigport.h :
@@ -65,6 +58,7 @@ main.c /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
  ../../py/pystack.h ../../py/objfun.h ../../py/repl.h ../../py/gc.h :
  ../../py/mperrno.h /usr/include/newlib/errno.h :
  /usr/include/newlib/sys/errno.h ../../lib/utils/pyexec.h :
- ../../py/stackctrl.h ../../lib/utils/gchelper.h LPC17xx.h core_cm3.h :
- system_LPC17xx.h type.h usb.h usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h :
- serial.h vcomdemo.h led/led.h delay.h :
+ ../../py/stackctrl.h ../../lib/utils/gchelper.h mpconfigport.h LPC17xx.h :
+ core_cm3.h core_cmInstr.h core_cmFunc.h system_LPC17xx.h type.h usb.h :
+ usbcfg.h usbhw.h usbcore.h cdc.h cdcuser.h serial.h vcomdemo.h led/led.h :
+ delay.h :

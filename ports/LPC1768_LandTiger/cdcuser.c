@@ -110,7 +110,7 @@ int CDC_OutBufAvailChar (int *availChar) {
 
   *availChar = CDC_BUF_COUNT(CDC_OutBuf);
 
-  return *availChar;
+  return (0);
 }
 /* end Buffer handling */
 
@@ -305,9 +305,8 @@ void CDC_BulkIn(void) {
 
   // ... add code to check for overwrite
 
-  // numBytesRead = ser_Read ((char *)&BulkBufIn[0], &numBytesAvail);
-  numBytesRead = 0;
-  
+  numBytesRead = ser_Read ((char *)&BulkBufIn[0], &numBytesAvail);
+
   // send over USB
   if (numBytesRead > 0) {
 	USB_WriteEP (CDC_DEP_IN, &BulkBufIn[0], numBytesRead);

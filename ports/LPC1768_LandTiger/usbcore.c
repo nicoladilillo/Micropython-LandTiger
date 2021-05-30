@@ -23,6 +23,7 @@
  *----------------------------------------------------------------------------*/
 #include "type.h"
 
+
 #include "usb.h"
 #include "usbcfg.h"
 #include "usbhw.h"
@@ -170,7 +171,7 @@ void USB_StatusOutStage (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetStatus (void) {
+static inline uint32_t USB_ReqGetStatus (void) {
   uint32_t n, m;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
@@ -209,7 +210,7 @@ uint32_t USB_ReqGetStatus (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetClrFeature (uint32_t sc) {
+static inline uint32_t USB_ReqSetClrFeature (uint32_t sc) {
   uint32_t n, m;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
@@ -271,7 +272,7 @@ uint32_t USB_ReqSetClrFeature (uint32_t sc) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetAddress (void) {
+static inline uint32_t USB_ReqSetAddress (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_DEVICE:
@@ -290,7 +291,7 @@ uint32_t USB_ReqSetAddress (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetDescriptor (void) {
+static inline uint32_t USB_ReqGetDescriptor (void) {
   uint8_t  *pD;
   uint32_t len, n;
 
@@ -373,7 +374,7 @@ uint32_t USB_ReqGetDescriptor (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetConfiguration (void) {
+static inline uint32_t USB_ReqGetConfiguration (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_DEVICE:
@@ -392,7 +393,7 @@ uint32_t USB_ReqGetConfiguration (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetConfiguration (void) {
+static inline uint32_t USB_ReqSetConfiguration (void) {
   USB_COMMON_DESCRIPTOR *pD;
   uint32_t alt = 0;
   uint32_t n, m;
@@ -483,7 +484,7 @@ uint32_t USB_ReqSetConfiguration (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetInterface (void) {
+static inline uint32_t USB_ReqGetInterface (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_INTERFACE:
@@ -506,7 +507,7 @@ uint32_t USB_ReqGetInterface (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetInterface (void) {
+static inline uint32_t USB_ReqSetInterface (void) {
   USB_COMMON_DESCRIPTOR *pD;
   uint32_t ifn = 0, alt = 0, old = 0, msk = 0;
   uint32_t n, m;

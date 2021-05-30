@@ -11,10 +11,6 @@ build/py/objexcept.o: ../../py/objexcept.c /usr/include/newlib/string.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdarg.h \
  /usr/include/newlib/assert.h /usr/include/newlib/stdio.h \
  /usr/include/newlib/sys/types.h /usr/include/newlib/sys/_stdint.h \
- /usr/include/newlib/machine/endian.h \
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h \
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  ../../py/objlist.h ../../py/obj.h ../../py/mpconfig.h mpconfigport.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h \
@@ -41,10 +37,6 @@ build/py/objexcept.o: ../../py/objexcept.c /usr/include/newlib/string.h \
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdarg.h :
  /usr/include/newlib/assert.h /usr/include/newlib/stdio.h :
  /usr/include/newlib/sys/types.h /usr/include/newlib/sys/_stdint.h :
- /usr/include/newlib/machine/endian.h :
- /usr/include/newlib/machine/_endian.h /usr/include/newlib/sys/select.h :
- /usr/include/newlib/sys/_sigset.h /usr/include/newlib/sys/_timeval.h :
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h :
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h :
  ../../py/objlist.h ../../py/obj.h ../../py/mpconfig.h mpconfigport.h :
  /usr/lib/gcc/arm-none-eabi/6.3.1/include/stdint.h :
