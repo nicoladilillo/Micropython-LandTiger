@@ -49,12 +49,9 @@ void VCOM_Serial2Usb(void) {
 	
   ser_AvailChar (&numAvailByte);
   if (numAvailByte > 0) {
-    if (CDC_DepInEmpty) {
-      numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
+	  numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
 
-      CDC_DepInEmpty = 0;
 	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
-    }
   }
 
 }

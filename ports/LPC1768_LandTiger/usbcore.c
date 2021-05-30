@@ -22,6 +22,7 @@
  *          V1.00 Initial Version
  *----------------------------------------------------------------------------*/
 #include "type.h"
+#include "LPC17xx.h"
 
 #include "usb.h"
 #include "usbcfg.h"
@@ -170,7 +171,7 @@ void USB_StatusOutStage (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetStatus (void) {
+ uint32_t USB_ReqGetStatus (void) {
   uint32_t n, m;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
@@ -209,7 +210,7 @@ uint32_t USB_ReqGetStatus (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetClrFeature (uint32_t sc) {
+ uint32_t USB_ReqSetClrFeature (uint32_t sc) {
   uint32_t n, m;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
@@ -271,7 +272,7 @@ uint32_t USB_ReqSetClrFeature (uint32_t sc) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetAddress (void) {
+ uint32_t USB_ReqSetAddress (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_DEVICE:
@@ -290,7 +291,7 @@ uint32_t USB_ReqSetAddress (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetDescriptor (void) {
+ uint32_t USB_ReqGetDescriptor (void) {
   uint8_t  *pD;
   uint32_t len, n;
 
@@ -373,7 +374,7 @@ uint32_t USB_ReqGetDescriptor (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetConfiguration (void) {
+ uint32_t USB_ReqGetConfiguration (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_DEVICE:
@@ -392,10 +393,11 @@ uint32_t USB_ReqGetConfiguration (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetConfiguration (void) {
+ uint32_t USB_ReqSetConfiguration (void) {
   USB_COMMON_DESCRIPTOR *pD;
   uint32_t alt = 0;
   uint32_t n, m;
+	int tmp;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_DEVICE:
@@ -429,7 +431,8 @@ uint32_t USB_ReqSetConfiguration (void) {
                   USB_DeviceStatus &= ~USB_GETSTATUS_SELF_POWERED;
                 }
               } else {
-                pD += ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+								tmp = (int)pD + (int)((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;;
+                pD = (USB_COMMON_DESCRIPTOR *)tmp;
                 continue;
               }
               break;
@@ -447,7 +450,8 @@ uint32_t USB_ReqSetConfiguration (void) {
               }
               break;
           }
-          pD += pD->bLength;
+					tmp = (int)pD + (int)pD->bLength;
+          pD = (USB_COMMON_DESCRIPTOR *)tmp;
         }
       }
       else {
@@ -483,7 +487,7 @@ uint32_t USB_ReqSetConfiguration (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqGetInterface (void) {
+ uint32_t USB_ReqGetInterface (void) {
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_INTERFACE:
@@ -506,11 +510,12 @@ uint32_t USB_ReqGetInterface (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-uint32_t USB_ReqSetInterface (void) {
+ uint32_t USB_ReqSetInterface (void) {
   USB_COMMON_DESCRIPTOR *pD;
   uint32_t ifn = 0, alt = 0, old = 0, msk = 0;
   uint32_t n, m;
   uint32_t set;
+	int tmp;
 
   switch (SetupPacket.bmRequestType.BM.Recipient) {
     case REQUEST_TO_INTERFACE:
@@ -521,7 +526,8 @@ uint32_t USB_ReqSetInterface (void) {
         switch (pD->bDescriptorType) {
           case USB_CONFIGURATION_DESCRIPTOR_TYPE:
             if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USB_Configuration) {
-              pD += ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+							tmp = (int)pD + ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+							pD = (USB_COMMON_DESCRIPTOR *)tmp;
               continue;
             }
             break;
@@ -555,7 +561,8 @@ uint32_t USB_ReqSetInterface (void) {
             }
            break;
         }
-        pD += pD->bLength;
+				tmp = (int)pD + (int)pD->bLength;
+        pD = (USB_COMMON_DESCRIPTOR *)tmp;
       }
       break;
     default:

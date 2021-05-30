@@ -73,8 +73,8 @@ int _start() {
         i++;
         DELAY_ms(3000);
         // mp_hal_stdout_tx_strn("Ciao\n", 5);
-        // riceive_Data("ciao\n", 5);
-	    // VCOM_Serial2Usb();                      
+        riceive_Data("ciao\n", 5);
+	    VCOM_Serial2Usb();                      
     }
     
     //mp_hal_stdout_tx_strn("Ciao", 4);

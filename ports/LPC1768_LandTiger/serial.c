@@ -76,7 +76,7 @@ void ser_ClosePort (char portNum ) {
 	LPC_PINCON->PINSEL0 &= ~0x000000F0;
 	/* Disable the interrupt in the VIC and UART controllers */
 	LPC_UART0->IER = 0;
-	NVIC_DisableIRQ(UART0_IRQn);
+	//NVIC_DisableIRQ(UART0_IRQn);
   }
   else
   {
@@ -84,7 +84,7 @@ void ser_ClosePort (char portNum ) {
 	LPC_PINCON->PINSEL4 &= ~0x0000000F;
 	/* Disable the interrupt in the VIC and UART controllers */
 	LPC_UART1->IER = 0;
-	NVIC_DisableIRQ(UART1_IRQn);
+	//NVIC_DisableIRQ(UART1_IRQn);
   }	
   return;
 }
@@ -169,15 +169,15 @@ void ser_InitPort0 (unsigned long baudrate, unsigned int  databits,
   }
 
   dll = (pclk/16)/baudrate ;	/*baud rate */
-  LPC_UART0->FDR = 0;                             // Fractional divider not used
-  LPC_UART0->LCR = 0x80 | lcr_d | lcr_p | lcr_s;  // Data bits, Parity,   Stop bit
-  LPC_UART0->DLL = dll;                           // Baud Rate depending on PCLK
-  LPC_UART0->DLM = (dll >> 8);                    // High divisor latch
-  LPC_UART0->LCR = 0x00 | lcr_d | lcr_p | lcr_s;  // DLAB = 0
-  LPC_UART0->IER = 0x03;                          // Enable TX/RX interrupts
+  // LPC_UART0->FDR = 0;                             // Fractional divider not used
+  // LPC_UART0->LCR = 0x80 | lcr_d | lcr_p | lcr_s;  // Data bits, Parity,   Stop bit
+  // LPC_UART0->DLL = dll;                           // Baud Rate depending on PCLK
+  // LPC_UART0->DLM = (dll >> 8);                    // High divisor latch
+  // LPC_UART0->LCR = 0x00 | lcr_d | lcr_p | lcr_s;  // DLAB = 0
+  // LPC_UART0->IER = 0x03;                          // Enable TX/RX interrupts
 
-  LPC_UART0->FCR = 0x07;				/* Enable and reset TX and RX FIFO. */
-  ser_txRestart = 1;                                   // TX fifo is empty
+  // LPC_UART0->FCR = 0x07;				/* Enable and reset TX and RX FIFO. */
+  // ser_txRestart = 1;                                   // TX fifo is empty
 
   /* Enable the UART Interrupt */
   NVIC_EnableIRQ(UART0_IRQn);
@@ -264,18 +264,18 @@ void ser_InitPort1 (unsigned long baudrate, unsigned int  databits,
   }
 
   dll = (pclk/16)/baudrate ;	/*baud rate */
-  LPC_UART1->FDR = 0;                             // Fractional divider not used
-  LPC_UART1->LCR = 0x80 | lcr_d | lcr_p | lcr_s;  // Data bits, Parity,   Stop bit
-  LPC_UART1->DLL = dll;                           // Baud Rate depending on PCLK
-  LPC_UART1->DLM = (dll >> 8);                    // High divisor latch
-  LPC_UART1->LCR = 0x00 | lcr_d | lcr_p | lcr_s;  // DLAB = 0
-  LPC_UART1->IER = 0x03;                          // Enable TX/RX interrupts
+  // LPC_UART1->FDR = 0;                             // Fractional divider not used
+  // LPC_UART1->LCR = 0x80 | lcr_d | lcr_p | lcr_s;  // Data bits, Parity,   Stop bit
+  // LPC_UART1->DLL = dll;                           // Baud Rate depending on PCLK
+  // LPC_UART1->DLM = (dll >> 8);                    // High divisor latch
+  // LPC_UART1->LCR = 0x00 | lcr_d | lcr_p | lcr_s;  // DLAB = 0
+  // LPC_UART1->IER = 0x03;                          // Enable TX/RX interrupts
 
-  LPC_UART1->FCR = 0x07;				/* Enable and reset TX and RX FIFO. */
+  // LPC_UART1->FCR = 0x07;				/* Enable and reset TX and RX FIFO. */
   ser_txRestart = 1;                                   // TX fifo is empty
 
   /* Enable the UART Interrupt */
-  NVIC_EnableIRQ(UART1_IRQn);
+  // NVIC_EnableIRQ(UART1_IRQn);
   return;
 }
 
@@ -312,7 +312,8 @@ int ser_Write (char portNum, const char *buffer, int *length) {
       SER_BUF_WR(ser_out, *buffer++);            // Read Rx FIFO to buffer  
       bytesToWrite--;
   }     
-
+  
+  /*
   if (ser_txRestart) {
     ser_txRestart = 0;
 	if ( portNum == 0 )
@@ -324,7 +325,7 @@ int ser_Write (char portNum, const char *buffer, int *length) {
       LPC_UART1->THR = SER_BUF_RD(ser_out);             // Write to the Tx Register
 	}
   }
-
+  */
   return (bytesWritten); 
 }
 
@@ -350,56 +351,60 @@ void ser_LineState (unsigned short *lineState) {
 /*----------------------------------------------------------------------------
   serial port 0 interrupt
  *---------------------------------------------------------------------------*/
-void UART0_IRQHandler(void) 
-{ 
-  volatile unsigned long iir;
+// void UART0_IRQHandler(void) 
+// { 
+//   /* 
+//   volatile unsigned long iir;
   
-  iir = LPC_UART0->IIR;
-   
-  if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
-    while (LPC_UART0->LSR & 0x01) {                 // Rx FIFO is not empty
-      SER_BUF_WR(ser_in, LPC_UART0->RBR);           // Read Rx FIFO to buffer  
-    }
-  }
-  if ((iir & 0x2)) {                           // TXMIS pending
-	if (SER_BUF_COUNT(ser_out) != 0) {
-      LPC_UART0->THR = SER_BUF_RD(ser_out);         // Write to the Tx FIFO
-      ser_txRestart = 0;
-    }
-	else {
-      ser_txRestart = 1;
-	}
-  }
-  ser_lineState = LPC_UART0->LSR & 0x1E;            // update linestate
-  return;
-}
+//   iir = LPC_UART0->IIR;
 
-/*----------------------------------------------------------------------------
-  serial port 1 interrupt
- *---------------------------------------------------------------------------*/
-void UART1_IRQHandler(void) 
-{ 
-  volatile unsigned long iir;
-  
-  iir = LPC_UART1->IIR;
+//   if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
+//     while (LPC_UART0->LSR & 0x01) {                 // Rx FIFO is not empty
+//       SER_BUF_WR(ser_in, LPC_UART0->RBR);           // Read Rx FIFO to buffer  
+//     }
+//   }
+//   if ((iir & 0x2)) {                           // TXMIS pending
+// 	if (SER_BUF_COUNT(ser_out) != 0) {
+//       LPC_UART0->THR = SER_BUF_RD(ser_out);         // Write to the Tx FIFO
+//       ser_txRestart = 0;
+//     }
+// 	else {
+//       ser_txRestart = 1;
+// 	}
+//   }
+//   ser_lineState = LPC_UART0->LSR & 0x1E;            // update linestate
+//   */
+//   return;
+// }
+
+// /*----------------------------------------------------------------------------
+//   serial port 1 interrupt
+//  *---------------------------------------------------------------------------*/
+// void UART1_IRQHandler(void) 
+// { 
+//   /* 
+//   volatile unsigned long iir;
+
+//   iir = LPC_UART1->IIR;
    
-  if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
-    while (LPC_UART1->LSR & 0x01) {                 // Rx FIFO is not empty
-      SER_BUF_WR(ser_in, LPC_UART1->RBR);           // Read Rx FIFO to buffer  
-    }
-  }
-  if ((iir & 0x2)) {                           // TXMIS pending
-	if (SER_BUF_COUNT(ser_out) != 0) {
-      LPC_UART1->THR = SER_BUF_RD(ser_out);         // Write to the Tx FIFO
-      ser_txRestart = 0;
-    }
-	else {
-      ser_txRestart = 1;
-	}
-  }
-  ser_lineState = ((LPC_UART1->MSR<<8)|LPC_UART1->LSR) & 0xE01E;    // update linestate
-  return;
-}
+//   if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
+//     while (LPC_UART1->LSR & 0x01) {                 // Rx FIFO is not empty
+//       SER_BUF_WR(ser_in, LPC_UART1->RBR);           // Read Rx FIFO to buffer  
+//     }
+//   }
+//   if ((iir & 0x2)) {                           // TXMIS pending
+// 	if (SER_BUF_COUNT(ser_out) != 0) {
+//       LPC_UART1->THR = SER_BUF_RD(ser_out);         // Write to the Tx FIFO
+//       ser_txRestart = 0;
+//     }
+// 	else {
+//       ser_txRestart = 1;
+// 	}
+//   }
+//   ser_lineState = ((LPC_UART1->MSR<<8)|LPC_UART1->LSR) & 0xE01E;    // update linestate
+//   */
+//   return;
+// }
 
 void riceive_Data(const char *str, int n) {
   int i;
