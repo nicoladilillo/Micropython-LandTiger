@@ -24,7 +24,7 @@ CFLAGS_CORTEX_M3 =  -mthumb -mtune=cortex-m3 -mcpu=cortex-m3
 CFLAGS = $(INC) -Wall -std=c99 -nostdlib  $(CFLAGS_CORTEX_M3) $(COPT)
 LDFLAGS = -nostdlib -T LPC1768.ld -Map=$@.map --cref --gc-sections
 
-CFLAGS += -O1
+CFLAGS += -O1 -g
 
 CSUPEROPT = -Os # save some code space
 

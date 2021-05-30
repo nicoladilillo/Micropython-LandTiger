@@ -16,19 +16,17 @@
  * Copyright (c) 2009 Keil - An ARM Company. All rights reserved.
  *---------------------------------------------------------------------------*/
 
-#include <stdio.h>
-
-#ifndef __USB_H__ 
+#ifndef __USB_H__
 #define __USB_H__
 
 
-typedef union __attribute__((packed)) {
+typedef union {
   uint16_t W;
-    struct __attribute__((packed)) {
+  struct {
     uint8_t L;
     uint8_t H;
-  } WB;
-} WORD_BYTE;
+  } __attribute__((packed)) WB;
+} __attribute__((packed)) WORD_BYTE;
 
 
 /* bmRequestType.Dir */
@@ -48,14 +46,14 @@ typedef union __attribute__((packed)) {
 #define REQUEST_TO_OTHER           3
 
 /* bmRequestType Definition */
-typedef union __attribute__((packed)) _REQUEST_TYPE {
-  struct __attribute__((packed)) {
+typedef union _REQUEST_TYPE {
+  struct _BM {
     uint8_t Recipient : 5;
     uint8_t Type      : 2;
     uint8_t Dir       : 1;
-  } BM;
+  } __attribute__((packed)) BM;
   uint8_t B;
-} REQUEST_TYPE;
+} __attribute__((packed)) REQUEST_TYPE;
 
 /* USB Standard Request Codes */
 #define USB_REQUEST_GET_STATUS                 0
@@ -80,13 +78,13 @@ typedef union __attribute__((packed)) _REQUEST_TYPE {
 #define USB_FEATURE_REMOTE_WAKEUP              1
 
 /* USB Default Control Pipe Setup Packet */
-typedef struct __attribute__((packed))  {
+typedef struct _USB_SETUP_PACKET {
   REQUEST_TYPE bmRequestType;
   uint8_t      bRequest;
   WORD_BYTE    wValue;
   WORD_BYTE    wIndex;
   uint16_t     wLength;
-} USB_SETUP_PACKET;
+} __attribute__((packed)) USB_SETUP_PACKET;
 
 
 /* USB Descriptor Types */
@@ -148,7 +146,7 @@ typedef struct __attribute__((packed))  {
 #define USB_ENDPOINT_USAGE_RESERVED            0x30
 
 /* USB Standard Device Descriptor */
-typedef struct __attribute__((packed))  _USB_DEVICE_DESCRIPTOR {
+typedef struct _USB_DEVICE_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint16_t bcdUSB;
@@ -163,10 +161,10 @@ typedef struct __attribute__((packed))  _USB_DEVICE_DESCRIPTOR {
   uint8_t  iProduct;
   uint8_t  iSerialNumber;
   uint8_t  bNumConfigurations;
-} USB_DEVICE_DESCRIPTOR;
+} __attribute__((packed)) USB_DEVICE_DESCRIPTOR;
 
 /* USB 2.0 Device Qualifier Descriptor */
-typedef struct __attribute__((packed))  _USB_DEVICE_QUALIFIER_DESCRIPTOR {
+typedef struct _USB_DEVICE_QUALIFIER_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint16_t bcdUSB;
@@ -176,10 +174,10 @@ typedef struct __attribute__((packed))  _USB_DEVICE_QUALIFIER_DESCRIPTOR {
   uint8_t  bMaxPacketSize0;
   uint8_t  bNumConfigurations;
   uint8_t  bReserved;
-} USB_DEVICE_QUALIFIER_DESCRIPTOR;
+} __attribute__((packed)) USB_DEVICE_QUALIFIER_DESCRIPTOR;
 
 /* USB Standard Configuration Descriptor */
-typedef struct __attribute__((packed))  _USB_CONFIGURATION_DESCRIPTOR {
+typedef struct _USB_CONFIGURATION_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint16_t wTotalLength;
@@ -188,10 +186,10 @@ typedef struct __attribute__((packed))  _USB_CONFIGURATION_DESCRIPTOR {
   uint8_t  iConfiguration;
   uint8_t  bmAttributes;
   uint8_t  bMaxPower;
-} USB_CONFIGURATION_DESCRIPTOR;
+}  __attribute__((packed)) USB_CONFIGURATION_DESCRIPTOR;
 
 /* USB Standard Interface Descriptor */
-typedef struct __attribute__((packed))  _USB_INTERFACE_DESCRIPTOR {
+typedef  struct _USB_INTERFACE_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint8_t  bInterfaceNumber;
@@ -201,30 +199,30 @@ typedef struct __attribute__((packed))  _USB_INTERFACE_DESCRIPTOR {
   uint8_t  bInterfaceSubClass;
   uint8_t  bInterfaceProtocol;
   uint8_t  iInterface;
-} USB_INTERFACE_DESCRIPTOR;
+}__attribute__((packed)) USB_INTERFACE_DESCRIPTOR;
 
 /* USB Standard Endpoint Descriptor */
-typedef struct __attribute__((packed))  _USB_ENDPOINT_DESCRIPTOR {
+typedef  struct _USB_ENDPOINT_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint8_t  bEndpointAddress;
   uint8_t  bmAttributes;
   uint16_t wMaxPacketSize;
   uint8_t  bInterval;
-} USB_ENDPOINT_DESCRIPTOR;
+} __attribute__((packed)) USB_ENDPOINT_DESCRIPTOR;
 
 /* USB String Descriptor */
-typedef struct __attribute__((packed)) _USB_STRING_DESCRIPTOR {
+typedef struct _USB_STRING_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
   uint16_t bString/*[]*/;
-} USB_STRING_DESCRIPTOR;
+} __attribute__((packed)) USB_STRING_DESCRIPTOR;
 
 /* USB Common Descriptor */
-typedef struct __attribute__((packed)) _USB_COMMON_DESCRIPTOR {
+typedef struct _USB_COMMON_DESCRIPTOR {
   uint8_t  bLength;
   uint8_t  bDescriptorType;
-} USB_COMMON_DESCRIPTOR;
+} __attribute__((packed)) USB_COMMON_DESCRIPTOR;
 
 
 #endif  /* __USB_H__ */

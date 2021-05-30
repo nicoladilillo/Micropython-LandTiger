@@ -27,7 +27,8 @@
 #include "usbcore.h"
 #include "usbuser.h"
 
-#define EP_MSK_CTRL 0x0001      /* Control Endpoint Logical Address Mask */
+
+#define EP_MSK_USBCTRL 0x0001      /* Control Endpoint Logical Address Mask */
 #define EP_MSK_BULK 0xC924      /* Bulk Endpoint Logical Address Mask */
 #define EP_MSK_INT  0x4492      /* Interrupt Endpoint Logical Address Mask */
 #define EP_MSK_ISO  0x1248      /* Isochronous Endpoint Logical Address Mask */
@@ -150,8 +151,8 @@ void USB_Init (void) {
 
   LPC_SC->PCONP |= (1UL<<31);                /* USB PCLK -> enable USB Per.       */
 
-  LPC_USB->USBClkCtrl = 0x1A;                /* Dev, PortSel, AHB clock enable */
-  while ((LPC_USB->USBClkSt & 0x1A) != 0x1A); 
+  LPC_USB->USBClkCtrl = 0x12;                /* Dev, AHB clock enable */
+  while ((LPC_USB->USBClkSt & 0x12) != 0x12); 
 
   NVIC_EnableIRQ(USB_IRQn);               /* enable USB interrupt */
 
@@ -197,14 +198,14 @@ void USB_Reset (void) {
                (USB_ERROR_EVENT ? ERR_INT   : 0);
 
 #if USB_DMA
-  LPC_USB->USBUDCAH   = USB_RAM_ADR;
-  LPC_USB->USBDMARClr = 0xFFFFFFFF;
-  LPC_USB->USBEpDMADis  = 0xFFFFFFFF;
-  LPC_USB->USBEpDMAEn   = USB_DMA_EP;
-  LPC_USB->USBEoTIntClr = 0xFFFFFFFF;
-  LPC_USB->USBNDDRIntClr = 0xFFFFFFFF;
-  LPC_USB->USBSysErrIntClr = 0xFFFFFFFF;
-  LPC_USB->USBDMAIntEn  = 0x00000007;
+  LPC_USB->UDCAH   = USB_RAM_ADR;
+  LPC_USB->DMARClr = 0xFFFFFFFF;
+  LPC_USB->EpDMADis  = 0xFFFFFFFF;
+  LPC_USB->EpDMAEn   = USB_DMA_EP;
+  LPC_USB->EoTIntClr = 0xFFFFFFFF;
+  LPC_USB->NDDRIntClr = 0xFFFFFFFF;
+  LPC_USB->SysErrIntClr = 0xFFFFFFFF;
+  LPC_USB->DMAIntEn  = 0x00000007;
   DDMemMap[0] = 0x00000000;
   DDMemMap[1] = 0x00000000;
   for (n = 0; n < USB_EP_NUM; n++) {
@@ -319,6 +320,7 @@ void USB_DirCtrlEP (uint32_t dir) {
 }
 
 
+
 /*
  *  Enable USB Endpoint
  *    Parameters:      EPNum: Endpoint Number
@@ -417,7 +419,7 @@ uint32_t USB_ReadEP (uint32_t EPNum, uint8_t *pData) {
   cnt &= PKT_LNGTH_MASK;
 
   for (n = 0; n < (cnt + 3) / 4; n++) {
-    *((__attribute__((packed))  uint32_t *)pData) = LPC_USB->USBRxData;
+    *((__attribute__((packed)) uint32_t *)pData) = LPC_USB->USBRxData;
     pData += 4;
   }
   LPC_USB->USBCtrl = 0;
@@ -530,7 +532,7 @@ uint32_t USB_DMA_Setup(uint32_t EPNum, USB_DMA_DESCRIPTOR *pDD) {
  */
 
 void USB_DMA_Enable (uint32_t EPNum) {
-  LPC_USB->USBEpDMAEn = 1 << EPAdr(EPNum);
+  LPC_USB->EpDMAEn = 1 << EPAdr(EPNum);
 }
 
 
@@ -543,7 +545,7 @@ void USB_DMA_Enable (uint32_t EPNum) {
  */
 
 void USB_DMA_Disable (uint32_t EPNum) {
-  LPC_USB->USBEpDMADis = 1 << EPAdr(EPNum);
+  LPC_USB->EpDMADis = 1 << EPAdr(EPNum);
 }
 
 
@@ -742,8 +744,8 @@ void USB_IRQHandler (void) {
 
 #if USB_DMA
 
-  if (LPC_USB->USBDMAIntSt & 0x00000001) {          /* End of Transfer Interrupt */
-    val = LPC_USB->USBEoTIntSt;
+  if (LPC_USB->DMAIntSt & 0x00000001) {          /* End of Transfer Interrupt */
+    val = LPC_USB->EoTIntSt;
     for (n = 2; n < USB_EP_NUM; n++) {      /* Check All Endpoints */
       if (val & (1 << n)) {
         m = n >> 1;
@@ -758,11 +760,11 @@ void USB_IRQHandler (void) {
         }
       }
     }
-    LPC_USB->USBEoTIntClr = val;
+    LPC_USB->EoTIntClr = val;
   }
 
-  if (LPC_USB->USBDMAIntSt & 0x00000002) {          /* New DD Request Interrupt */
-    val = LPC_USB->USBNDDRIntSt;
+  if (LPC_USB->DMAIntSt & 0x00000002) {          /* New DD Request Interrupt */
+    val = LPC_USB->NDDRIntSt;
     for (n = 2; n < USB_EP_NUM; n++) {      /* Check All Endpoints */
       if (val & (1 << n)) {
         m = n >> 1;
@@ -777,11 +779,11 @@ void USB_IRQHandler (void) {
         }
       }
     }
-    LPC_USB->USBNDDRIntClr = val;
+    LPC_USB->NDDRIntClr = val;
   }
 
-  if (LPC_USB->USBDMAIntSt & 0x00000004) {          /* System Error Interrupt */
-    val = LPC_USB->USBSysErrIntSt;
+  if (LPC_USB->DMAIntSt & 0x00000004) {          /* System Error Interrupt */
+    val = LPC_USB->SysErrIntSt;
     for (n = 2; n < USB_EP_NUM; n++) {      /* Check All Endpoints */
       if (val & (1 << n)) {
         m = n >> 1;
@@ -796,7 +798,7 @@ void USB_IRQHandler (void) {
         }
       }
     }
-    LPC_USB->USBSysErrIntClr = val;
+    LPC_USB->SysErrIntClr = val;
   }
 
 #endif /* USB_DMA */
@@ -804,3 +806,4 @@ void USB_IRQHandler (void) {
 isr_end:
   return;
 }
+

@@ -455,6 +455,7 @@ uint32_t SystemCoreClock = __CORE_CLK;/*!< System Clock Frequency (Core Clock)*/
   @{
  */
 
+
 /**
  * Update SystemCoreClock variable
  *
@@ -463,25 +464,49 @@ uint32_t SystemCoreClock = __CORE_CLK;/*!< System Clock Frequency (Core Clock)*/
  *
  * @brief  Updates the SystemCoreClock with current core Clock
  *         retrieved from cpu registers.
- */void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
-{
-  /* Determine clock frequency according to clock register values             */
-  if (((LPC_SC->PLL0STAT >> 24) & 3) != 3) {
-    switch (LPC_SC->CLKSRCSEL & 0x03) {
-      case 0:                                /* Int. RC oscillator => PLL0    */
-      case 3:                                /* Reserved, default to Int. RC  */
-        SystemCoreClock = IRC_OSC / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-      case 1:                                /* Main oscillator => PLL0       */
-        SystemCoreClock = OSC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-      case 2:                                /* RTC oscillator => PLL0        */
-        SystemCoreClock = RTC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-    }
-  }
+ */
+// void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
+// {
+//   /* Determine clock frequency according to clock register values             */
+//   if (((LPC_SC->PLL0STAT >> 24) & 3) == 3) { /* If PLL0 enabled and connected */
+//     switch (LPC_SC->CLKSRCSEL & 0x03) {
+//       case 0:                                /* Int. RC oscillator => PLL0    */
+//       case 3:                                /* Reserved, default to Int. RC  */
+//         SystemCoreClock = (IRC_OSC *
+//                           ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+//                           (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+//                           ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+//         break;
+//       case 1:                                /* Main oscillator => PLL0       */
+//         SystemCoreClock = (OSC_CLK *
+//                           ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+//                           (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+//                           ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+//         break;
+//       case 2:                                /* RTC oscillator => PLL0        */
+//         SystemCoreClock = (RTC_CLK *
+//                           ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+//                           (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+//                           ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+//         break;
+//     }
+//   } else {
+//     switch (LPC_SC->CLKSRCSEL & 0x03) {
+//       case 0:                                /* Int. RC oscillator => PLL0    */
+//       case 3:                                /* Reserved, default to Int. RC  */
+//         SystemCoreClock = IRC_OSC / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+//         break;
+//       case 1:                                /* Main oscillator => PLL0       */
+//         SystemCoreClock = OSC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+//         break;
+//       case 2:                                /* RTC oscillator => PLL0        */
+//         SystemCoreClock = RTC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+//         break;
+//     }
+//   }
 
-}
+// }
+
 
 /**
  * Initialize the system

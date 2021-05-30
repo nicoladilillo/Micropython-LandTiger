@@ -51,7 +51,7 @@ extern void SystemInit (void);
  * @brief  Updates the SystemCoreClock with current core Clock 
  *         retrieved from cpu registers.
  */
-extern void SystemCoreClockUpdate (void);
+// extern void SystemCoreClockUpdate (void);
 
 #ifdef __cplusplus
 }

@@ -32,11 +32,47 @@
  Call this function before using VCOM_putchar or VCOM_getchar
  *---------------------------------------------------------------------------*/
 void VCOM_Init(void) {
-	#if PORT_NUM
-		CDC_Init (1);
-	#else
-		CDC_Init (0);
-	#endif
+#if PORT_NUM
+  CDC_Init (1);
+#else
+  CDC_Init (0);
+#endif
+}
+
+
+/*----------------------------------------------------------------------------
+  Reads character from serial port buffer and writes to USB buffer
+ *---------------------------------------------------------------------------*/
+void VCOM_Serial2Usb(void) {
+  static char serBuf [USB_CDC_BUFSIZE];
+         int  numBytesRead, numAvailByte;
+	
+  ser_AvailChar (&numAvailByte);
+  if (numAvailByte > 0) {
+    if (CDC_DepInEmpty) {
+      numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
+
+      CDC_DepInEmpty = 0;
+	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
+    }
+  }
+
+}
+
+/*----------------------------------------------------------------------------
+  Reads character from USB buffer and writes to serial port buffer
+ *---------------------------------------------------------------------------*/
+void VCOM_Usb2Serial(void) {
+  static char serBuf [USB_CDC_BUFSIZE];
+  int  numBytesRead, numAvailByte;
+	
+  ser_AvailChar (&numAvailByte);
+  if (numAvailByte > 0) {
+    numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
+
+	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
+  }
+
 }
 
 
@@ -54,18 +90,4 @@ void VCOM_CheckSerialState (void) {
   }
 }
 
-/*----------------------------------------------------------------------------
-  Reads character from serial port buffer and writes to USB buffer
- *---------------------------------------------------------------------------*/
-void VCOM_Serial2Usb(void) {
-  static char serBuf [USB_CDC_BUFSIZE];
-  int  numBytesRead, numAvailByte;
-	
-  ser_AvailChar (&numAvailByte);
-  if (numAvailByte > 0) {
-    numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
 
-	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
-  }
-
-}

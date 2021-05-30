@@ -172,60 +172,60 @@
 // Header functional descriptor
 // (usbcdc11.pdf, 5.2.3.1)
 // This header must precede any list of class-specific descriptors.
-typedef struct __attribute__((packed)) _CDC_HEADER_DESCRIPTOR{
+typedef struct _CDC_HEADER_DESCRIPTOR{
   uint8_t bFunctionLength;                     // size of this descriptor in bytes
   uint8_t bDescriptorType;                     // CS_INTERFACE descriptor type
   uint8_t bDescriptorSubtype;                  // Header functional descriptor subtype
   uint16_t bcdCDC;                              // USB CDC specification release version
-} CDC_HEADER_DESCRIPTOR;
+}  __attribute__((packed)) CDC_HEADER_DESCRIPTOR;
 
 //Call management functional descriptor
 // (usbcdc11.pdf, 5.2.3.2)
 // Describes the processing of calls for the communication class interface.
-typedef struct __attribute__((packed)) _CDC_CALL_MANAGEMENT_DESCRIPTOR {
+typedef struct _CDC_CALL_MANAGEMENT_DESCRIPTOR {
   uint8_t bFunctionLength;                     // size of this descriptor in bytes
   uint8_t bDescriptorType;                     // CS_INTERFACE descriptor type
   uint8_t bDescriptorSubtype;                  // call management functional descriptor subtype
   uint8_t bmCapabilities;                      // capabilities that this configuration supports
   uint8_t bDataInterface;                      // interface number of the data class interface used for call management (optional)
-} CDC_CALL_MANAGEMENT_DESCRIPTOR;
+}  __attribute__((packed)) CDC_CALL_MANAGEMENT_DESCRIPTOR;
 
 // Abstract control management functional descriptor
 // (usbcdc11.pdf, 5.2.3.3)
 // Describes the command supported by the communication interface class with the Abstract Control Model subclass code.
-typedef struct __attribute__((packed)) _CDC_ABSTRACT_CONTROL_MANAGEMENT_DESCRIPTOR {
+typedef struct _CDC_ABSTRACT_CONTROL_MANAGEMENT_DESCRIPTOR {
   uint8_t bFunctionLength;                     // size of this descriptor in bytes
   uint8_t bDescriptorType;                     // CS_INTERFACE descriptor type
   uint8_t bDescriptorSubtype;                  // abstract control management functional descriptor subtype
   uint8_t bmCapabilities;                      // capabilities supported by this configuration
-} CDC_ABSTRACT_CONTROL_MANAGEMENT_DESCRIPTOR;
+}  __attribute__((packed)) CDC_ABSTRACT_CONTROL_MANAGEMENT_DESCRIPTOR;
 
 // Union functional descriptors
 // (usbcdc11.pdf, 5.2.3.8)
 // Describes the relationship between a group of interfaces that can be considered to form a functional unit.
-typedef struct __attribute__((packed)) _CDC_UNION_DESCRIPTOR {
+typedef struct _CDC_UNION_DESCRIPTOR {
   uint8_t bFunctionLength;                     // size of this descriptor in bytes
   uint8_t bDescriptorType;                     // CS_INTERFACE descriptor type
   uint8_t bDescriptorSubtype;                  // union functional descriptor subtype
   uint8_t bMasterInterface;                    // interface number designated as master
-} CDC_UNION_DESCRIPTOR;
+}  __attribute__((packed)) CDC_UNION_DESCRIPTOR;
 
 // Union functional descriptors with one slave interface
 // (usbcdc11.pdf, 5.2.3.8)
-typedef struct __attribute__((packed)) _CDC_UNION_1SLAVE_DESCRIPTOR {
+typedef struct _CDC_UNION_1SLAVE_DESCRIPTOR {
   CDC_UNION_DESCRIPTOR sUnion;              // Union functional descriptor
   uint8_t                 bSlaveInterfaces[1]; // Slave interface 0
-} CDC_UNION_1SLAVE_DESCRIPTOR;
+}  __attribute__((packed)) CDC_UNION_1SLAVE_DESCRIPTOR;
 
 //  Line coding structure
 //  Format of the data returned when a GetLineCoding request is received
 // (usbcdc11.pdf, 6.2.13)
-typedef struct __attribute__((packed)) _CDC_LINE_CODING {
+typedef struct _CDC_LINE_CODING {
   uint32_t dwDTERate;                          // Data terminal rate in bits per second
   uint8_t  bCharFormat;                        // Number of stop bits
   uint8_t  bParityType;                        // Parity bit type
   uint8_t  bDataBits;                          // Number of data bits
-} CDC_LINE_CODING;
+}  __attribute__((packed)) CDC_LINE_CODING;
 
 // Notification header
 // Data sent on the notification endpoint must follow this header.
@@ -233,3 +233,4 @@ typedef struct __attribute__((packed)) _CDC_LINE_CODING {
 typedef USB_SETUP_PACKET CDC_NOTIFICATION_HEADER;
 
 #endif /* __CDC_H */
+

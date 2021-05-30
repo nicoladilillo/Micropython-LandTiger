@@ -17,7 +17,6 @@
 #include "type.h"
 #include "serial.h"
 
-extern uint32_t SystemCoreClock;
 
 /*----------------------------------------------------------------------------
   Defines for ring buffers
@@ -181,7 +180,7 @@ void ser_InitPort0 (unsigned long baudrate, unsigned int  databits,
   ser_txRestart = 1;                                   // TX fifo is empty
 
   /* Enable the UART Interrupt */
-  // NVIC_EnableIRQ(UART0_IRQn);
+  NVIC_EnableIRQ(UART0_IRQn);
   return;
 }
 
@@ -276,7 +275,7 @@ void ser_InitPort1 (unsigned long baudrate, unsigned int  databits,
   ser_txRestart = 1;                                   // TX fifo is empty
 
   /* Enable the UART Interrupt */
-  // NVIC_EnableIRQ(UART1_IRQn);
+  NVIC_EnableIRQ(UART1_IRQn);
   return;
 }
 
@@ -288,13 +287,11 @@ int ser_Read (char *buffer, const int *length) {
   
   /* Read *length bytes, block if *bytes are not avaialable	*/
   bytesToRead = *length;
-  /*
   bytesToRead = (bytesToRead < (*length)) ? bytesToRead : (*length);
   bytesRead = bytesToRead;
-  */
 
   while (bytesToRead--) {
-    // while (SER_BUF_EMPTY(ser_in));                     // Block until data is available if none
+    while (SER_BUF_EMPTY(ser_in));                     // Block until data is available if none
     *buffer++ = SER_BUF_RD(ser_in);
   }
   return (bytesRead);  
@@ -315,8 +312,7 @@ int ser_Write (char portNum, const char *buffer, int *length) {
       SER_BUF_WR(ser_out, *buffer++);            // Read Rx FIFO to buffer  
       bytesToWrite--;
   }     
-	
-	/*
+
   if (ser_txRestart) {
     ser_txRestart = 0;
 	if ( portNum == 0 )
@@ -328,8 +324,7 @@ int ser_Write (char portNum, const char *buffer, int *length) {
       LPC_UART1->THR = SER_BUF_RD(ser_out);             // Write to the Tx Register
 	}
   }
-	*/
-	
+
   return (bytesWritten); 
 }
 
@@ -359,7 +354,6 @@ void UART0_IRQHandler(void)
 { 
   volatile unsigned long iir;
   
-  /*
   iir = LPC_UART0->IIR;
    
   if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
@@ -377,7 +371,6 @@ void UART0_IRQHandler(void)
 	}
   }
   ser_lineState = LPC_UART0->LSR & 0x1E;            // update linestate
-  */
   return;
 }
 
@@ -388,7 +381,6 @@ void UART1_IRQHandler(void)
 { 
   volatile unsigned long iir;
   
-  /*
   iir = LPC_UART1->IIR;
    
   if ((iir & 0x4) || (iir & 0xC)) {            // RDA or CTI pending
@@ -406,7 +398,6 @@ void UART1_IRQHandler(void)
 	}
   }
   ser_lineState = ((LPC_UART1->MSR<<8)|LPC_UART1->LSR) & 0xE01E;    // update linestate
-  */
   return;
 }
 
