@@ -28,6 +28,7 @@
 
 #include "led/led.h"
 #include "delay.h"
+#include "mpconfigport.h"
    
 #if MICROPY_ENABLE_COMPILER
 void do_str(const char *src, mp_parse_input_kind_t input_kind) {
@@ -66,19 +67,26 @@ int _start() {
 
     int i = 0;
     for(;;) {
-        if(i%2 == 0)
-            LED_On(6);
-        else
-            LED_Off(6);
-        i++;
-        DELAY_ms(3000);
-        // mp_hal_stdout_tx_strn("Ciao\n", 5);
-        riceive_Data("ciao\n", 5);
-	    VCOM_Serial2Usb();                      
+        // if(i%2 == 0)
+        //     LED_On(6);
+        // else
+        //     LED_Off(6);
+        // i++;
+        // DELAY_ms(3000);
+        // mp_hal_stdout_tx_strn("Ciao Da Nicola", 14);
+
+        // MORE COMPLEX
+        int c = mp_hal_stdin_rx_chr();
+        mp_hal_stdout_tx_strn((char *)&c, 1);
+
+        // riceive_Data("ciao\n", 5);
+	    // VCOM_Serial2Usb();                      
     }
     
-    //mp_hal_stdout_tx_strn("Ciao", 4);
     
+    
+    return 0;
+
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
 

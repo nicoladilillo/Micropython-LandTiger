@@ -29,3 +29,5 @@
 
 #define LEDMSK 0x000000FF  /* P2.0..7 */
 
+void VCOM_Init(void);
+void VCOM_Serial2Usb(void);
