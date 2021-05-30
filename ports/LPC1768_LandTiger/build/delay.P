@@ -1,2 +1,0 @@
-build/delay.o: delay.c delay.h
-delay.c delay.h :
