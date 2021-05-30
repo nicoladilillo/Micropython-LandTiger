@@ -1,11 +1,5 @@
 #include <string.h>
 
-#include "py/runtime.h"
-#include "py/stream.h"
-#include "py/mperrno.h"
-#include "py/mphal.h"
-#include "extmod/misc.h"
-
 #include "LPC17xx.h"
 
 #include "type.h"

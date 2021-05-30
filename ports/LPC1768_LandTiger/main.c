@@ -65,28 +65,6 @@ int _start() {
 
     while (!USB_Configuration);              // wait until USB is configured
 
-    int i = 0;
-    for(;;) {
-        // if(i%2 == 0)
-        //     LED_On(6);
-        // else
-        //     LED_Off(6);
-        // i++;
-        // DELAY_ms(3000);
-        // mp_hal_stdout_tx_strn("Ciao Da Nicola", 14);
-
-        // MORE COMPLEX
-        int c = mp_hal_stdin_rx_chr();
-        mp_hal_stdout_tx_strn((char *)&c, 1);
-
-        // riceive_Data("ciao\n", 5);
-	    // VCOM_Serial2Usb();                      
-    }
-    
-    
-    
-    return 0;
-
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
 
