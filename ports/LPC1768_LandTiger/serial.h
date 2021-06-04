@@ -27,4 +27,5 @@ extern void  ser_AvailChar (int *availChar);
 extern int   ser_Write     (char portNum, const char *buffer, int *length);
 extern int   ser_Read      (char *buffer, const int *length);
 extern void  ser_LineState (unsigned short *lineState);
-void riceive_Data(const char *str, int n);
+extern void write_data_in(const char *str, int len);
+

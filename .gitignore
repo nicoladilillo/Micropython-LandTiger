@@ -46,3 +46,7 @@ genrst/
 # MacOS desktop metadata files
 ######################
 .DS_Store
+.cproject
+.project
+.settings/language.settings.xml
+.vscode/settings.json

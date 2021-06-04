@@ -28,8 +28,6 @@
 #include "usbuser.h"
 
 
-#pragma diag_suppress 1441
-
 
 #define EP_MSK_CTRL 0x0001      /* Control Endpoint Logical Address Mask */
 #define EP_MSK_BULK 0xC924      /* Bulk Endpoint Logical Address Mask */

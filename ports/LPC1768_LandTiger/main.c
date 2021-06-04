@@ -26,7 +26,6 @@
 #include "serial.h"
 #include "vcomdemo.h"
 
-#include "led/led.h"
 #include "delay.h"
 #include "mpconfigport.h"
    
@@ -53,10 +52,7 @@ static char heap[2048];
 #endif
 
 
-int _start() {   
-
-    // SystemInit();
-    LED_init();
+int _start() {
     
     VCOM_Init();                              // VCOM Initialization
 
@@ -64,6 +60,8 @@ int _start() {
     USB_Connect(TRUE);                         // USB Connect
 
     while (!USB_Configuration);              // wait until USB is configured
+
+    DELAY_ms(2000);
 
     int stack_dummy;
     stack_top = (char *)&stack_dummy;

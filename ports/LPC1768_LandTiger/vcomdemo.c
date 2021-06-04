@@ -53,7 +53,7 @@ void VCOM_Serial2Usb(void) {
 
 	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
   }
-
+  
 }
 
 /*----------------------------------------------------------------------------

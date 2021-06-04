@@ -20,6 +20,7 @@
         "library.h": "c",
         "irq.h": "c",
         "usbcfg.h": "c",
-        "mphal.h": "c"
+        "mphal.h": "c",
+        "readline.h": "c"
     }
 }
